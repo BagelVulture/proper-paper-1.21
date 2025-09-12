@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "proper-paper",
+	"version": "${version}",
+	"name": "Proper Paper",
+	"description": "A mod that aims to make paper production more realistic",
+	"authors": [
+		"BagelVulture https://www.youtube.com/@bagelvulture"
+	],
+	"contact": {
+		"homepage": "https://www.youtube.com/@bagelvulture",
+		"sources": "https://github.com/BagelVulture/proper-paper-1.21"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/proper-paper/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.bagelvulture.ProperPaper"
+		],
+		"fabric-datagen": [
+			"net.bagelvulture.ProperPaperDataGenerator"
+		],
+		"client": [
+			"net.bagelvulture.ProperPaperClient"
+		]
+	},
+	"mixins": [
+		"proper-paper.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.17.2",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
