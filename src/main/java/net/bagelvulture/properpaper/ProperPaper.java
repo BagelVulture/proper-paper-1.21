@@ -1,5 +1,7 @@
-package net.bagelvulture;
+package net.bagelvulture.properpaper;
 
+import net.bagelvulture.properpaper.item.ModItemGroups;
+import net.bagelvulture.properpaper.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ public class ProperPaper implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
+		ModItems.registerModItems();
+		ModItemGroups.registerModItemGroups();
 	}
 }

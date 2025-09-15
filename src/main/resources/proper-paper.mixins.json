@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "net.bagelvulture.mixin",
+	"package": "net.bagelvulture.properpaper.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"ExampleMixin"

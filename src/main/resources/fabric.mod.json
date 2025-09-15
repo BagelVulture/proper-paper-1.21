@@ -16,13 +16,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.bagelvulture.ProperPaper"
+			"net.bagelvulture.properpaper.ProperPaper"
 		],
 		"fabric-datagen": [
-			"net.bagelvulture.ProperPaperDataGenerator"
+			"net.bagelvulture.properpaper.ProperPaperDataGenerator"
 		],
 		"client": [
-			"net.bagelvulture.ProperPaperClient"
+			"net.bagelvulture.properpaper.ProperPaperClient"
 		]
 	},
 	"mixins": [

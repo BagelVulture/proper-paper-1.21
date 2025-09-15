@@ -1,0 +1,9 @@
+{
+  "item.proper-paper.wood_chips": "Wood Chips",
+  "item.proper-paper.sawdust": "Sawdust",
+  "item.proper-paper.paper_pulp": "Paper Pulp",
+  "item.proper-paper.damp_paper": "Damp Paper",
+  "item.proper-paper.rough_paper": "Rough Paper",
+
+  "itemgroup.proper-paper.proper-paper_item_group": "Proper Paper"
+}

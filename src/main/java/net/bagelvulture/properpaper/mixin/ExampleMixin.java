@@ -1,4 +1,4 @@
-package net.bagelvulture.mixin;
+package net.bagelvulture.properpaper.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;

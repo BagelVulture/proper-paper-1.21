@@ -1,4 +1,4 @@
-package net.bagelvulture;
+package net.bagelvulture.properpaper;
 
 import net.fabricmc.api.ClientModInitializer;
 
