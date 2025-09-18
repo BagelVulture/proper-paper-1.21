@@ -1,5 +1,6 @@
 package net.bagelvulture.properpaper.datagen;
 
+import net.bagelvulture.properpaper.block.ModBlocks;
 import net.bagelvulture.properpaper.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -14,6 +15,9 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.DRYING_RACK);
+        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.HOT_ROLLER);
+        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.MACERATOR);
     }
 
     @Override

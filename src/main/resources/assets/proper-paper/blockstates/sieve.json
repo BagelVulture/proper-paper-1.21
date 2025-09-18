@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "proper-paper:block/sieve"
+    }
+  }
+}

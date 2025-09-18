@@ -1,5 +1,6 @@
 package net.bagelvulture.properpaper;
 
+import net.bagelvulture.properpaper.block.ModBlocks;
 import net.bagelvulture.properpaper.item.ModItemGroups;
 import net.bagelvulture.properpaper.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -15,5 +16,6 @@ public class ProperPaper implements ModInitializer {
 	public void onInitialize() {
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemGroups();
+		ModBlocks.registerModBlocks();
 	}
 }

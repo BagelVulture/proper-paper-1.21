@@ -1,6 +1,7 @@
 package net.bagelvulture.properpaper.item;
 
 import net.bagelvulture.properpaper.ProperPaper;
+import net.bagelvulture.properpaper.block.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,11 @@ public class ModItemGroups {
                 entries.add(ModItems.PAPER_PULP);
                 entries.add(ModItems.DAMP_PAPER);
                 entries.add(ModItems.ROUGH_PAPER);
+
+                entries.add(ModBlocks.DRYING_RACK);
+                entries.add(ModBlocks.HOT_ROLLER);
+                entries.add(ModBlocks.MACERATOR);
+                entries.add(ModBlocks.SIEVE);
             }).build()
     );
 

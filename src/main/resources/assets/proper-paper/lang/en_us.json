@@ -5,5 +5,10 @@
   "item.proper-paper.damp_paper": "Damp Paper",
   "item.proper-paper.rough_paper": "Rough Paper",
 
-  "itemgroup.proper-paper.proper-paper_item_group": "Proper Paper"
+  "itemgroup.proper-paper.proper-paper_item_group": "Proper Paper",
+
+  "block.proper-paper.drying_rack": "Drying Rack",
+  "block.proper-paper.hot_roller": "Hot Roller",
+  "block.proper-paper.macerator": "Macerator",
+  "block.proper-paper.sieve": "Sieve"
 }

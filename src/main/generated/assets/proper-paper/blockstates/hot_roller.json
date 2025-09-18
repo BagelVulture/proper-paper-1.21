@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "proper-paper:block/hot_roller",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "proper-paper:block/hot_roller"
+    },
+    "facing=south": {
+      "model": "proper-paper:block/hot_roller",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "proper-paper:block/hot_roller",
+      "y": 270
+    }
+  }
+}

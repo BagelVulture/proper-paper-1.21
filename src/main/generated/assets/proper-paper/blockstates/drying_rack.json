@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "proper-paper:block/drying_rack",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "proper-paper:block/drying_rack"
+    },
+    "facing=south": {
+      "model": "proper-paper:block/drying_rack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "proper-paper:block/drying_rack",
+      "y": 270
+    }
+  }
+}

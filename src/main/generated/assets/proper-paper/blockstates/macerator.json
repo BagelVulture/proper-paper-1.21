@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "proper-paper:block/macerator",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "proper-paper:block/macerator"
+    },
+    "facing=south": {
+      "model": "proper-paper:block/macerator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "proper-paper:block/macerator",
+      "y": 270
+    }
+  }
+}
