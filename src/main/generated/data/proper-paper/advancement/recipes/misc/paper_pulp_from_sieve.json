@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_paper_pulp": {
+      "conditions": {
+        "items": [
+          {
+            "items": "proper-paper:paper_pulp"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "proper-paper:paper_pulp_from_sieve"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_paper_pulp"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "proper-paper:paper_pulp_from_sieve"
+    ]
+  }
+}

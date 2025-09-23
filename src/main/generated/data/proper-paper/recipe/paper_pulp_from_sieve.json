@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:seive",
+  "ingredient": {
+    "item": "proper-paper:paper_pulp"
+  },
+  "input_count": 1,
+  "result": {
+    "count": 2,
+    "id": "proper-paper:damp_paper"
+  },
+  "sieveingtime": 40
+}

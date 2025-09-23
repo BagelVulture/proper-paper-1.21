@@ -17,7 +17,6 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.DRYING_RACK);
         blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.HOT_ROLLER);
-        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.MACERATOR);
     }
 
     @Override
