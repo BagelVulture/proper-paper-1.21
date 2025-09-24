@@ -9,13 +9,24 @@ import net.minecraft.util.Identifier;
 
 public class ModRecipes {
     public static final RecipeSerializer<SieveRecipe> SIEVE_SERIALIZER = Registry.register(
-            Registries.RECIPE_SERIALIZER, Identifier.of(ProperPaper.MOD_ID, "seive"),
+            Registries.RECIPE_SERIALIZER, Identifier.of(ProperPaper.MOD_ID, "sieve"),
             new SieveRecipe.Serializer());
     public static final RecipeType<SieveRecipe> SIEVE_TYPE = Registry.register(
-            Registries.RECIPE_TYPE, Identifier.of(ProperPaper.MOD_ID, "seive"), new RecipeType<SieveRecipe>() {
+            Registries.RECIPE_TYPE, Identifier.of(ProperPaper.MOD_ID, "sieve"), new RecipeType<SieveRecipe>() {
                 @Override
                 public String toString() {
-                    return "seive";
+                    return "sieve";
+                }
+            });
+
+    public static final RecipeSerializer<DryingRackRecipe> DRYING_RACK_SERIALIZER = Registry.register(
+            Registries.RECIPE_SERIALIZER, Identifier.of(ProperPaper.MOD_ID, "drying_rack"),
+            new DryingRackRecipe.Serializer());
+    public static final RecipeType<DryingRackRecipe> DRYING_RACK_TYPE = Registry.register(
+            Registries.RECIPE_TYPE, Identifier.of(ProperPaper.MOD_ID, "drying_rack"), new RecipeType<DryingRackRecipe>() {
+                @Override
+                public String toString() {
+                    return "drying_rack";
                 }
             });
 

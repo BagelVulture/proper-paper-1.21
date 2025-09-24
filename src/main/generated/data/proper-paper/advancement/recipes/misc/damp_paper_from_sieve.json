@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "proper-paper:paper_pulp_from_sieve"
+        "recipe": "proper-paper:damp_paper_from_sieve"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "proper-paper:paper_pulp_from_sieve"
+      "proper-paper:damp_paper_from_sieve"
     ]
   }
 }

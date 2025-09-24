@@ -1,6 +1,6 @@
 package net.bagelvulture.properpaper.datagen.custom;
 
-import net.bagelvulture.properpaper.recipe.SieveRecipe;
+import net.bagelvulture.properpaper.recipe.DryingRackRecipe;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementRequirements;
@@ -18,45 +18,45 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // usage:
-//SieveRecipeJsonBuilder.create(
+//DryingRackRecipeJsonBuilder.create(
 //                RecipeCategory.MISC,
 //                Items.OUTPUT, 2,
 //                Ingredient.ofItems(Items.INPUT), 7,
-//                200                                                          // sieveing time (in ticks)
+//                200                                                          // drying time (in ticks)
 //        ).criterion((hasItem(Items.INPUT), conditionsFromItem(Items.INPUT))
 //        .offerTo(exporter, Identifier.of("ProperPaper.MOD_ID", "output"));
 
 
-public class SieveRecipeJsonBuilder {
+public class DryingRackRecipeJsonBuilder {
     private final RecipeCategory category;
     private final Ingredient input;
     private final int inputCount;
     private final int outputCount;
     private final ItemStack output;
-    private final int sieveingTime;
+    private final int dryingTime;
     private final Map<String, AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
     @Nullable
     private String group;
 
-    private SieveRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int sieveingTime) {
+    private DryingRackRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
         this.category = category;
         this.input = input;
         this.inputCount = inputCount;
         this.outputCount = outputCount;
         this.output = new ItemStack(outputItem, outputCount);
-        this.sieveingTime = sieveingTime;
+        this.dryingTime = dryingTime;
     }
 
-    public static SieveRecipeJsonBuilder create(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
-        return new SieveRecipeJsonBuilder(category, outputItem, outputCount, input, inputCount, dryingTime);
+    public static DryingRackRecipeJsonBuilder create(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
+        return new DryingRackRecipeJsonBuilder(category, outputItem, outputCount, input, inputCount, dryingTime);
     }
 
-    public SieveRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
+    public DryingRackRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
         criteria.put(name, criterion);
         return this;
     }
 
-    public SieveRecipeJsonBuilder group(@Nullable String group) {
+    public DryingRackRecipeJsonBuilder group(@Nullable String group) {
         this.group = group;
         return this;
     }
@@ -67,7 +67,7 @@ public class SieveRecipeJsonBuilder {
         }
 
         String path = recipeId.getPath();
-        if (!path.endsWith("_from_sieve")) path += "_from_sieve";
+        if (!path.endsWith("_from_drying")) path += "_from_drying";
         Identifier id = Identifier.of(recipeId.getNamespace(), path);
 
         Advancement.Builder advBuilder = exporter.getAdvancementBuilder()
@@ -77,7 +77,7 @@ public class SieveRecipeJsonBuilder {
 
         criteria.forEach(advBuilder::criterion);
 
-        SieveRecipe recipe = new SieveRecipe(input, inputCount, output, sieveingTime);
+        DryingRackRecipe recipe = new DryingRackRecipe(input, inputCount, output, dryingTime);
 
         exporter.accept(id, recipe, advBuilder.build(id.withPrefixedPath("recipes/" + category.getName() + "/")));
     }

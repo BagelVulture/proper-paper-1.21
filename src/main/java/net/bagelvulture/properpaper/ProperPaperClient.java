@@ -2,8 +2,10 @@ package net.bagelvulture.properpaper;
 
 import net.bagelvulture.properpaper.block.ModBlocks;
 import net.bagelvulture.properpaper.block.entity.ModBlockEntities;
+import net.bagelvulture.properpaper.block.entity.renderer.DryingRackBlockEntityRenderer;
 import net.bagelvulture.properpaper.block.entity.renderer.SieveBlockEntityRenderer;
 import net.bagelvulture.properpaper.screen.ModScreenHandlers;
+import net.bagelvulture.properpaper.screen.custom.DryingRackScreen;
 import net.bagelvulture.properpaper.screen.custom.SieveScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -23,6 +25,15 @@ public class ProperPaperClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.SIEVE_BE, SieveBlockEntityRenderer::new);
         ModelLoadingPlugin.register(pluginContext -> {
             pluginContext.addModels(Identifier.of("proper-paper", "block/paper_pulp"));
+        });
+
+        HandledScreens.register(ModScreenHandlers.DRYING_RACK_SCREEN_HANDLER, DryingRackScreen::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.DRYING_RACK_BE, DryingRackBlockEntityRenderer::new);
+        ModelLoadingPlugin.register(pluginContext -> {
+            pluginContext.addModels(Identifier.of("proper-paper", "block/wet_paper"));
+        });
+        ModelLoadingPlugin.register(pluginContext -> {
+            pluginContext.addModels(Identifier.of("proper-paper", "block/dry_paper"));
         });
     }
 }

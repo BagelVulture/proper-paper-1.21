@@ -1,5 +1,5 @@
 {
-  "type": "proper-paper:seive",
+  "type": "proper-paper:sieve",
   "ingredient": {
     "item": "proper-paper:paper_pulp"
   },

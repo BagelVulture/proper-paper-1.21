@@ -2,6 +2,7 @@ package net.bagelvulture.properpaper.datagen;
 
 
 import net.bagelvulture.properpaper.ProperPaper;
+import net.bagelvulture.properpaper.datagen.custom.DryingRackRecipeJsonBuilder;
 import net.bagelvulture.properpaper.datagen.custom.SieveRecipeJsonBuilder;
 import net.bagelvulture.properpaper.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -27,6 +28,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         Ingredient.ofItems(ModItems.PAPER_PULP), 1,
                         40
                 ).criterion(hasItem(ModItems.PAPER_PULP), conditionsFromItem(ModItems.PAPER_PULP))
-                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "paper_pulp"));
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "damp_paper"));
+
+        DryingRackRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.ROUGH_PAPER, 1,
+                        Ingredient.ofItems(ModItems.DAMP_PAPER), 1,
+                        40
+                ).criterion(hasItem(ModItems.DAMP_PAPER), conditionsFromItem(ModItems.DAMP_PAPER))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "rough_paper"));
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:drying_rack",
+  "dryingtime": 40,
+  "ingredient": {
+    "item": "proper-paper:damp_paper"
+  },
+  "input_count": 1,
+  "result": {
+    "count": 1,
+    "id": "proper-paper:rough_paper"
+  }
+}
