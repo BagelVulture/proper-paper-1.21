@@ -17,6 +17,8 @@ public class DryingRackScreen extends HandledScreen<DryingRackScreenHandler> {
 
     public DryingRackScreen(DryingRackScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        this.backgroundWidth = 176;
+        this.backgroundHeight = 166;
     }
 
     @Override
@@ -30,13 +32,21 @@ public class DryingRackScreen extends HandledScreen<DryingRackScreenHandler> {
 
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrow(context, x, y);
+        renderProgressArrows(context, x, y);
     }
 
-    private void renderProgressArrow(DrawContext context, int x, int y) {
-        if(handler.isCrafting()) {
-            context.drawTexture(ARROW_TEXTURE, x + 76, y + 35, 0, 0,
-                    handler.getScaledArrowProgress(), 16, 24, 16);
+    private void renderProgressArrows(DrawContext context, int x, int y) {
+        int baseSlotX = x + 44;
+        int slotY = y + 34;
+        int arrowYOffset = 24;
+
+        for (int i = 0; i < 4; i++) {
+            int arrowWidth = handler.getScaledSlotProgress(i);
+            if (arrowWidth > 0) {
+                context.drawTexture(ARROW_TEXTURE, baseSlotX + i * 24, slotY + arrowYOffset,
+                        0, 0, arrowWidth, 16,
+                        24, 16);
+            }
         }
     }
 

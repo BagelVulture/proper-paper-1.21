@@ -18,40 +18,43 @@ public class DryingRackScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
     public final DryingRackBlockEntity blockEntity;
 
-    public DryingRackScreenHandler(int syncId, PlayerInventory inventory, BlockPos pos) {
-        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(2));
+    public DryingRackScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
+        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(8));
     }
 
-    public DryingRackScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+    public DryingRackScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate propertyDelegate) {
         super(ModScreenHandlers.DRYING_RACK_SCREEN_HANDLER, syncId);
         this.inventory = ((Inventory) blockEntity);
         this.blockEntity = ((DryingRackBlockEntity) blockEntity);
-        this.propertyDelegate = arrayPropertyDelegate;
+        this.propertyDelegate = propertyDelegate;
 
-        this.addSlot(new Slot(inventory, 0, 56, 34));
-        this.addSlot(new Slot(inventory, 1, 104, 34) {
-            @Override
-            public boolean canInsert(ItemStack stack) {
-                return false;
-            }
-        });
+        int baseX = 44;
+        int baseY = 34;
+        for (int i = 0; i < 4; i++) {
+            this.addSlot(new Slot(this.inventory, i, baseX + i * 24, baseY) {
+                @Override
+                public boolean canInsert(ItemStack stack) {
+                    return getStack().isEmpty();
+                }
+
+                @Override
+                public int getMaxItemCount() {
+                    return 1;
+                }
+            });
+        }
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
 
-        addProperties(arrayPropertyDelegate);
+        addProperties(this.propertyDelegate);
     }
 
-    public boolean isCrafting() {
-        return propertyDelegate.get(0) > 0;
-    }
-
-    public int getScaledArrowProgress() {
-        int progress = this.propertyDelegate.get(0);
-        int maxProgress = this.propertyDelegate.get(1);
+    public int getScaledSlotProgress(int slot) {
+        int progress = this.propertyDelegate.get(slot);
+        int max = this.propertyDelegate.get(4 + slot);
         int arrowPixelSize = 24;
-
-        return maxProgress != 0 && progress != 0 ? progress * arrowPixelSize / maxProgress : 0;
+        return (max > 0 && progress > 0) ? progress * arrowPixelSize / max : 0;
     }
 
     @Override
@@ -65,8 +68,10 @@ public class DryingRackScreenHandler extends ScreenHandler {
                 if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
-                return ItemStack.EMPTY;
+            } else {
+                if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
+                    return ItemStack.EMPTY;
+                }
             }
 
             if (originalStack.isEmpty()) {

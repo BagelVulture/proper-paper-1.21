@@ -1,6 +1,6 @@
 {
   "type": "proper-paper:drying_rack",
-  "dryingtime": 40,
+  "dryingtime": 120,
   "ingredient": {
     "item": "proper-paper:damp_paper"
   },

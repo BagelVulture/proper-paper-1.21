@@ -26,7 +26,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         RecipeCategory.MISC,
                         ModItems.DAMP_PAPER, 2,
                         Ingredient.ofItems(ModItems.PAPER_PULP), 1,
-                        40
+                        80
                 ).criterion(hasItem(ModItems.PAPER_PULP), conditionsFromItem(ModItems.PAPER_PULP))
                 .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "damp_paper"));
 
@@ -34,7 +34,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         RecipeCategory.MISC,
                         ModItems.ROUGH_PAPER, 1,
                         Ingredient.ofItems(ModItems.DAMP_PAPER), 1,
-                        40
+                        120
                 ).criterion(hasItem(ModItems.DAMP_PAPER), conditionsFromItem(ModItems.DAMP_PAPER))
                 .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "rough_paper"));
     }
