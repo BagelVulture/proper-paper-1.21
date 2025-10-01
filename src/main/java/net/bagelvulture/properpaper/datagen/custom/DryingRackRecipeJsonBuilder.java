@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -35,8 +34,6 @@ public class DryingRackRecipeJsonBuilder {
     private final ItemStack output;
     private final int dryingTime;
     private final Map<String, AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
-    @Nullable
-    private String group;
 
     private DryingRackRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
         this.category = category;
@@ -53,11 +50,6 @@ public class DryingRackRecipeJsonBuilder {
 
     public DryingRackRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
         criteria.put(name, criterion);
-        return this;
-    }
-
-    public DryingRackRecipeJsonBuilder group(@Nullable String group) {
-        this.group = group;
         return this;
     }
 

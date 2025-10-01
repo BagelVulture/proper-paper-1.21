@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:hot_roller",
+  "ingredient": {
+    "item": "proper-paper:rough_paper"
+  },
+  "input_count": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:paper"
+  },
+  "rollingtime": 120
+}

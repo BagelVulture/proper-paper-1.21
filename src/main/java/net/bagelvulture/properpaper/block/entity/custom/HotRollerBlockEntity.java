@@ -1,9 +1,7 @@
 package net.bagelvulture.properpaper.block.entity.custom;
 
-import net.bagelvulture.properpaper.recipe.ModRecipes;
-import net.bagelvulture.properpaper.recipe.SieveRecipe;
-import net.bagelvulture.properpaper.recipe.SieveRecipeInput;
-import net.bagelvulture.properpaper.screen.custom.SieveScreenHandler;
+import net.bagelvulture.properpaper.recipe.*;
+import net.bagelvulture.properpaper.screen.custom.HotRollerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.bagelvulture.properpaper.block.entity.ImplementedInventory;
 import net.bagelvulture.properpaper.block.entity.ModBlockEntities;
@@ -30,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
+public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT = 0;
@@ -40,14 +38,14 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
     private int progress = 0;
     private int maxProgress = 72;
 
-    public SieveBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.SIEVE_BE, pos, state);
+    public HotRollerBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.HOT_ROLLER_BE, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> SieveBlockEntity.this.progress;
-                    case 1 -> SieveBlockEntity.this.maxProgress;
+                    case 0 -> HotRollerBlockEntity.this.progress;
+                    case 1 -> HotRollerBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -55,8 +53,8 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0: SieveBlockEntity.this.progress = value;
-                    case 1: SieveBlockEntity.this.maxProgress = value;
+                    case 0: HotRollerBlockEntity.this.progress = value;
+                    case 1: HotRollerBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -79,37 +77,37 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable("block.proper-paper.sieve");
+        return Text.translatable("block.proper-paper.hot_roller");
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new SieveScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new HotRollerScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt, registryLookup);
         Inventories.writeNbt(nbt, inventory, registryLookup);
-        nbt.putInt("sieve.progress", progress);
-        nbt.putInt("sieve.max_progress", maxProgress);
+        nbt.putInt("hot_roller.progress", progress);
+        nbt.putInt("hot_roller.max_progress", maxProgress);
     }
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         Inventories.readNbt(nbt, inventory, registryLookup);
-        progress = nbt.getInt("sieve.progress");
-        maxProgress = nbt.getInt("sieve.max_progress");
+        progress = nbt.getInt("hot_roller.progress");
+        maxProgress = nbt.getInt("hot_roller.max_progress");
         super.readNbt(nbt, registryLookup);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        Optional<RecipeEntry<SieveRecipe>> recipeEntry = getCurrentRecipe();
+        Optional<RecipeEntry<HotRollerRecipe>> recipeEntry = getCurrentRecipe();
         if (recipeEntry.isPresent()) {
-            SieveRecipe sieveRecipe = recipeEntry.get().value();
+            HotRollerRecipe hotRollerRecipe = recipeEntry.get().value();
             if (progress == 0) {
-                maxProgress = sieveRecipe.sieveingTime();
+                maxProgress = hotRollerRecipe.rollingTime();
             }
             increaseCraftingProgress();
             markDirty(world, pos, state);
@@ -129,14 +127,14 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
     }
 
     private void craftItem() {
-        Optional<RecipeEntry<SieveRecipe>> recipe = getCurrentRecipe();
+        Optional<RecipeEntry<HotRollerRecipe>> recipe = getCurrentRecipe();
 
         if (recipe.isEmpty()) return;
 
-        SieveRecipe sieveRecipe = recipe.get().value();
-        ItemStack output = sieveRecipe.output();
+        HotRollerRecipe hotRollerRecipe = recipe.get().value();
+        ItemStack output = hotRollerRecipe.output();
 
-        this.removeStack(INPUT_SLOT, sieveRecipe.inputCount());
+        this.removeStack(INPUT_SLOT, hotRollerRecipe.inputCount());
         this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
                 this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
         world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
@@ -147,10 +145,10 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
     }
 
     private void increaseCraftingProgress() {
-        Optional<RecipeEntry<SieveRecipe>> recipeEntry = getCurrentRecipe();
+        Optional<RecipeEntry<HotRollerRecipe>> recipeEntry = getCurrentRecipe();
         if (recipeEntry.isEmpty()) return;
 
-        SieveRecipe recipe = recipeEntry.get().value();
+        HotRollerRecipe recipe = recipeEntry.get().value();
         ItemStack result = recipe.output();
 
         if (canInsertItemIntoOutputSlot(result) && canInsertAmountIntoOutputSlot(result.getCount())) {
@@ -158,9 +156,9 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
         }
     }
 
-    private Optional<RecipeEntry<SieveRecipe>> getCurrentRecipe() {
+    private Optional<RecipeEntry<HotRollerRecipe>> getCurrentRecipe() {
         return this.getWorld().getRecipeManager()
-                .getFirstMatch(ModRecipes.SIEVE_TYPE, new SieveRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
+                .getFirstMatch(ModRecipes.HOT_ROLLER_TYPE, new HotRollerRecipeInput(inventory.get(INPUT_SLOT)), this.getWorld());
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
@@ -187,6 +185,11 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
 
 
 
+
+    @Override
+    public void markDirty() {
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+    }
 
     @Override
     public void setStack(int slot, ItemStack stack) {

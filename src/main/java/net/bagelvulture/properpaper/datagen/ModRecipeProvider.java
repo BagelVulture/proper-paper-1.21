@@ -3,11 +3,13 @@ package net.bagelvulture.properpaper.datagen;
 
 import net.bagelvulture.properpaper.ProperPaper;
 import net.bagelvulture.properpaper.datagen.custom.DryingRackRecipeJsonBuilder;
+import net.bagelvulture.properpaper.datagen.custom.HotRollerRecipeJsonBuilder;
 import net.bagelvulture.properpaper.datagen.custom.SieveRecipeJsonBuilder;
 import net.bagelvulture.properpaper.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
@@ -37,5 +39,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         120
                 ).criterion(hasItem(ModItems.DAMP_PAPER), conditionsFromItem(ModItems.DAMP_PAPER))
                 .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "rough_paper"));
+
+        HotRollerRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        Items.PAPER, 1,
+                        Ingredient.ofItems(ModItems.ROUGH_PAPER), 1,
+                        120
+                ).criterion(hasItem(ModItems.ROUGH_PAPER), conditionsFromItem(ModItems.ROUGH_PAPER))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "paper"));
     }
 }

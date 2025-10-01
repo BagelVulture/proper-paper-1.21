@@ -9,13 +9,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class DryingRackScreen extends HandledScreen<DryingRackScreenHandler> {
+public class HotRollerScreen extends HandledScreen<HotRollerScreenHandler> {
     private static final Identifier GUI_TEXTURE =
-            Identifier.of(ProperPaper.MOD_ID, "textures/gui/dryingrack/dryingrack_gui.png");
+            Identifier.of(ProperPaper.MOD_ID, "textures/gui/hotroller/hotroller_gui.png");
     private static final Identifier ARROW_TEXTURE =
             Identifier.of(ProperPaper.MOD_ID, "textures/gui/arrow_progress.png");
 
-    public DryingRackScreen(DryingRackScreenHandler handler, PlayerInventory inventory, Text title) {
+    public HotRollerScreen(HotRollerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
@@ -30,21 +30,13 @@ public class DryingRackScreen extends HandledScreen<DryingRackScreenHandler> {
 
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrows(context, x, y);
+        renderProgressArrow(context, x, y);
     }
 
-    private void renderProgressArrows(DrawContext context, int x, int y) {
-        int baseSlotX = x + 44;
-        int slotY = y + 34;
-        int arrowYOffset = 24;
-
-        for (int i = 0; i < 4; i++) {
-            int arrowWidth = handler.getScaledSlotProgress(i);
-            if (arrowWidth > 0) {
-                context.drawTexture(ARROW_TEXTURE, baseSlotX + i * 24, slotY + arrowYOffset,
-                        0, 0, arrowWidth, 16,
-                        24, 16);
-            }
+    private void renderProgressArrow(DrawContext context, int x, int y) {
+        if(handler.isCrafting()) {
+            context.drawTexture(ARROW_TEXTURE, x + 76, y + 35, 0, 0,
+                    handler.getScaledArrowProgress(), 16, 24, 16);
         }
     }
 

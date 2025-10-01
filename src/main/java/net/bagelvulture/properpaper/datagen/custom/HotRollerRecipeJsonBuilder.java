@@ -1,6 +1,6 @@
 package net.bagelvulture.properpaper.datagen.custom;
 
-import net.bagelvulture.properpaper.recipe.SieveRecipe;
+import net.bagelvulture.properpaper.recipe.HotRollerRecipe;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementRequirements;
@@ -17,38 +17,38 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // usage:
-//SieveRecipeJsonBuilder.create(
+//HotRollerRecipeJsonBuilder.create(
 //                RecipeCategory.MISC,
 //                Items.OUTPUT, 2,
 //                Ingredient.ofItems(Items.INPUT), 7,
-//                200                                                          // sieveing time (in ticks)
+//                200                                                          // rolling time (in ticks)
 //        ).criterion((hasItem(Items.INPUT), conditionsFromItem(Items.INPUT))
 //        .offerTo(exporter, Identifier.of("ProperPaper.MOD_ID", "output"));
 
 
-public class SieveRecipeJsonBuilder {
+public class HotRollerRecipeJsonBuilder {
     private final RecipeCategory category;
     private final Ingredient input;
     private final int inputCount;
     private final int outputCount;
     private final ItemStack output;
-    private final int sieveingTime;
+    private final int rollingTime;
     private final Map<String, AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
 
-    private SieveRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int sieveingTime) {
+    private HotRollerRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int rollingTime) {
         this.category = category;
         this.input = input;
         this.inputCount = inputCount;
         this.outputCount = outputCount;
         this.output = new ItemStack(outputItem, outputCount);
-        this.sieveingTime = sieveingTime;
+        this.rollingTime = rollingTime;
     }
 
-    public static SieveRecipeJsonBuilder create(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
-        return new SieveRecipeJsonBuilder(category, outputItem, outputCount, input, inputCount, dryingTime);
+    public static HotRollerRecipeJsonBuilder create(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int rollingTime) {
+        return new HotRollerRecipeJsonBuilder(category, outputItem, outputCount, input, inputCount, rollingTime);
     }
 
-    public SieveRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
+    public HotRollerRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
         criteria.put(name, criterion);
         return this;
     }
@@ -59,7 +59,7 @@ public class SieveRecipeJsonBuilder {
         }
 
         String path = recipeId.getPath();
-        if (!path.endsWith("_from_sieve")) path += "_from_sieve";
+        if (!path.endsWith("_from_rolling")) path += "_from_rolling";
         Identifier id = Identifier.of(recipeId.getNamespace(), path);
 
         Advancement.Builder advBuilder = exporter.getAdvancementBuilder()
@@ -69,7 +69,7 @@ public class SieveRecipeJsonBuilder {
 
         criteria.forEach(advBuilder::criterion);
 
-        SieveRecipe recipe = new SieveRecipe(input, inputCount, output, sieveingTime);
+        HotRollerRecipe recipe = new HotRollerRecipe(input, inputCount, output, rollingTime);
 
         exporter.accept(id, recipe, advBuilder.build(id.withPrefixedPath("recipes/" + category.getName() + "/")));
     }

@@ -30,6 +30,17 @@ public class ModRecipes {
                 }
             });
 
+    public static final RecipeSerializer<HotRollerRecipe> HOT_ROLLER_SERIALIZER = Registry.register(
+            Registries.RECIPE_SERIALIZER, Identifier.of(ProperPaper.MOD_ID, "hot_roller"),
+            new HotRollerRecipe.Serializer());
+    public static final RecipeType<HotRollerRecipe> HOT_ROLLER_TYPE = Registry.register(
+            Registries.RECIPE_TYPE, Identifier.of(ProperPaper.MOD_ID, "hot_roller"), new RecipeType<HotRollerRecipe>() {
+                @Override
+                public String toString() {
+                    return "hot_roller";
+                }
+            });
+
     public static void registerRecipes() {
     }
 }
