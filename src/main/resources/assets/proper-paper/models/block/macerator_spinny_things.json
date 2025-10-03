@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.6",
+	"format_version": "1.9.0",
 	"textures": {
 		"0": "proper-paper:block/macerator_wheels",
 		"particle": "proper-paper:block/macerator_wheels"
@@ -7,8 +7,8 @@
 	"elements": [
 		{
 			"name": "grinder1",
-			"from": [-7, -3, -3],
-			"to": [7, 3, 3],
+			"from": [-6.999, -3, -3],
+			"to": [7.001, 3, 3],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [0, 0, 0]},
 			"faces": {
 				"north": {"uv": [0, 0, 14, 6], "texture": "#0"},
