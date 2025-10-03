@@ -1,6 +1,6 @@
 package net.bagelvulture.properpaper.datagen.custom;
 
-import net.bagelvulture.properpaper.recipe.DryingRackRecipe;
+import net.bagelvulture.properpaper.recipe.MaceratorRecipe;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementRequirements;
@@ -16,29 +16,29 @@ import net.minecraft.util.Identifier;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DryingRackRecipeJsonBuilder {
+public class MaceratorRecipeJsonBuilder {
     private final RecipeCategory category;
     private final Ingredient input;
     private final int inputCount;
     private final int outputCount;
     private final ItemStack output;
-    private final int dryingTime;
+    private final int maceratingTime;
     private final Map<String, AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
 
-    private DryingRackRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
+    private MaceratorRecipeJsonBuilder(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int maceratingTime) {
         this.category = category;
         this.input = input;
         this.inputCount = inputCount;
         this.outputCount = outputCount;
         this.output = new ItemStack(outputItem, outputCount);
-        this.dryingTime = dryingTime;
+        this.maceratingTime = maceratingTime;
     }
 
-    public static DryingRackRecipeJsonBuilder create(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int dryingTime) {
-        return new DryingRackRecipeJsonBuilder(category, outputItem, outputCount, input, inputCount, dryingTime);
+    public static MaceratorRecipeJsonBuilder create(RecipeCategory category, ItemConvertible outputItem, int outputCount, Ingredient input, int inputCount, int maceratingTime) {
+        return new MaceratorRecipeJsonBuilder(category, outputItem, outputCount, input, inputCount, maceratingTime);
     }
 
-    public DryingRackRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
+    public MaceratorRecipeJsonBuilder criterion(String name, AdvancementCriterion<?> criterion) {
         criteria.put(name, criterion);
         return this;
     }
@@ -49,7 +49,7 @@ public class DryingRackRecipeJsonBuilder {
         }
 
         String path = recipeId.getPath();
-        if (!path.endsWith("_from_drying")) path += "_from_drying";
+        if (!path.endsWith("_from_macerating")) path += "_from_macerating";
         Identifier id = Identifier.of(recipeId.getNamespace(), path);
 
         Advancement.Builder advBuilder = exporter.getAdvancementBuilder()
@@ -59,7 +59,7 @@ public class DryingRackRecipeJsonBuilder {
 
         criteria.forEach(advBuilder::criterion);
 
-        DryingRackRecipe recipe = new DryingRackRecipe(input, inputCount, output, dryingTime);
+        MaceratorRecipe recipe = new MaceratorRecipe(input, inputCount, output, maceratingTime);
 
         exporter.accept(id, recipe, advBuilder.build(id.withPrefixedPath("recipes/" + category.getName() + "/")));
     }

@@ -41,6 +41,17 @@ public class ModRecipes {
                 }
             });
 
+    public static final RecipeSerializer<MaceratorRecipe> MACERATOR_SERIALIZER = Registry.register(
+            Registries.RECIPE_SERIALIZER, Identifier.of(ProperPaper.MOD_ID, "macerator"),
+            new MaceratorRecipe.Serializer());
+    public static final RecipeType<MaceratorRecipe> MACERATOR_TYPE = Registry.register(
+            Registries.RECIPE_TYPE, Identifier.of(ProperPaper.MOD_ID, "macerator"), new RecipeType<MaceratorRecipe>() {
+                @Override
+                public String toString() {
+                    return "macerator";
+                }
+            });
+
     public static void registerRecipes() {
     }
 }

@@ -4,6 +4,7 @@ package net.bagelvulture.properpaper.datagen;
 import net.bagelvulture.properpaper.ProperPaper;
 import net.bagelvulture.properpaper.datagen.custom.DryingRackRecipeJsonBuilder;
 import net.bagelvulture.properpaper.datagen.custom.HotRollerRecipeJsonBuilder;
+import net.bagelvulture.properpaper.datagen.custom.MaceratorRecipeJsonBuilder;
 import net.bagelvulture.properpaper.datagen.custom.SieveRecipeJsonBuilder;
 import net.bagelvulture.properpaper.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -13,6 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
@@ -44,8 +46,33 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         RecipeCategory.MISC,
                         Items.PAPER, 1,
                         Ingredient.ofItems(ModItems.ROUGH_PAPER), 1,
-                        120
+                        40
                 ).criterion(hasItem(ModItems.ROUGH_PAPER), conditionsFromItem(ModItems.ROUGH_PAPER))
                 .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "paper"));
+
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.PLANKS), 1,
+                        40
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.PLANKS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_planks"));
+
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 4,
+                        Ingredient.fromTag(ItemTags.LOGS), 1,
+                        40
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.LOGS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_logs"));
+
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.SAWDUST, 1,
+                        Ingredient.ofItems(ModItems.WOOD_CHIPS), 1,
+                        40
+                ).criterion(hasItem(ModItems.WOOD_CHIPS), conditionsFromItem(ModItems.WOOD_CHIPS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "sawdust"));
+
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:macerator",
+  "ingredient": {
+    "item": "proper-paper:wood_chips"
+  },
+  "input_count": 1,
+  "maceratingtime": 40,
+  "result": {
+    "count": 1,
+    "id": "proper-paper:sawdust"
+  }
+}

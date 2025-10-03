@@ -4,6 +4,7 @@ import net.bagelvulture.properpaper.ProperPaper;
 import net.bagelvulture.properpaper.block.ModBlocks;
 import net.bagelvulture.properpaper.block.entity.custom.DryingRackBlockEntity;
 import net.bagelvulture.properpaper.block.entity.custom.HotRollerBlockEntity;
+import net.bagelvulture.properpaper.block.entity.custom.MaceratorBlockEntity;
 import net.bagelvulture.properpaper.block.entity.custom.SieveBlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -22,6 +23,10 @@ public class ModBlockEntities {
     public static final BlockEntityType<HotRollerBlockEntity> HOT_ROLLER_BE =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(ProperPaper.MOD_ID, "hot_roller_be"),
                     BlockEntityType.Builder.create(HotRollerBlockEntity::new, ModBlocks.HOT_ROLLER).build(null));
+
+    public static final BlockEntityType<MaceratorBlockEntity> MACERATOR_BE =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(ProperPaper.MOD_ID, "macerator_be"),
+                    BlockEntityType.Builder.create(MaceratorBlockEntity::new, ModBlocks.MACERATOR).build(null));
 
     public static void registerBlockEntities() {}
 }

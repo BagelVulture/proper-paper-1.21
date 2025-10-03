@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:macerator",
+  "ingredient": {
+    "tag": "minecraft:planks"
+  },
+  "input_count": 1,
+  "maceratingtime": 40,
+  "result": {
+    "count": 1,
+    "id": "proper-paper:wood_chips"
+  }
+}

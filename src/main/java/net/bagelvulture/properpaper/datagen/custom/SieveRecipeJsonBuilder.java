@@ -16,16 +16,6 @@ import net.minecraft.util.Identifier;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-// usage:
-//SieveRecipeJsonBuilder.create(
-//                RecipeCategory.MISC,
-//                Items.OUTPUT, 2,
-//                Ingredient.ofItems(Items.INPUT), 7,
-//                200                                                          // sieveing time (in ticks)
-//        ).criterion((hasItem(Items.INPUT), conditionsFromItem(Items.INPUT))
-//        .offerTo(exporter, Identifier.of("ProperPaper.MOD_ID", "output"));
-
-
 public class SieveRecipeJsonBuilder {
     private final RecipeCategory category;
     private final Ingredient input;

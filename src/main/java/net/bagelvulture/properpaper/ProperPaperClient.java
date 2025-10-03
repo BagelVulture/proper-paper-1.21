@@ -4,10 +4,12 @@ import net.bagelvulture.properpaper.block.ModBlocks;
 import net.bagelvulture.properpaper.block.entity.ModBlockEntities;
 import net.bagelvulture.properpaper.block.entity.renderer.DryingRackBlockEntityRenderer;
 import net.bagelvulture.properpaper.block.entity.renderer.HotRollerBlockEntityRenderer;
+import net.bagelvulture.properpaper.block.entity.renderer.MaceratorBlockEntityRenderer;
 import net.bagelvulture.properpaper.block.entity.renderer.SieveBlockEntityRenderer;
 import net.bagelvulture.properpaper.screen.ModScreenHandlers;
 import net.bagelvulture.properpaper.screen.custom.DryingRackScreen;
 import net.bagelvulture.properpaper.screen.custom.HotRollerScreen;
+import net.bagelvulture.properpaper.screen.custom.MaceratorScreen;
 import net.bagelvulture.properpaper.screen.custom.SieveScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -41,10 +43,10 @@ public class ProperPaperClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.HOT_ROLLER_SCREEN_HANDLER, HotRollerScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.HOT_ROLLER_BE, HotRollerBlockEntityRenderer::new);
 
-        //HandledScreens.register(ModScreenHandlers.MACERATOR_SCREEN_HANDLER, MaceratorScreen::new);
-        //BlockEntityRendererFactories.register(ModBlockEntities.MACERATOR_BE, MaceratorBlockEntityRenderer::new);
-        //ModelLoadingPlugin.register(pluginContext -> {
-        //    pluginContext.addModels(Identifier.of("proper-paper", "block/macerator_spinny_things"));
-        //});
+        HandledScreens.register(ModScreenHandlers.MACERATOR_SCREEN_HANDLER, MaceratorScreen::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.MACERATOR_BE, MaceratorBlockEntityRenderer::new);
+        ModelLoadingPlugin.register(pluginContext -> {
+            pluginContext.addModels(Identifier.of("proper-paper", "block/macerator_spinny_things"));
+        });
     }
 }
