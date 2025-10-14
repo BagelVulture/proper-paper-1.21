@@ -1,5 +1,6 @@
 package net.bagelvulture.properpaper.block.entity.custom;
 
+import com.ibm.icu.text.MessagePattern;
 import net.bagelvulture.properpaper.block.entity.ImplementedInventory;
 import net.bagelvulture.properpaper.block.entity.ModBlockEntities;
 import net.bagelvulture.properpaper.recipe.MaceratorRecipe;
@@ -17,11 +18,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.particle.ItemStackParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -117,6 +121,12 @@ public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenH
             if (hasCraftingFinished()) {
                 craftItem();
                 resetProgress();
+            }
+            if(!world.isClient() && !this.getStack(INPUT_SLOT).isEmpty() && progress != 0) {
+                ((ServerWorld) world).spawnParticles(
+                        new ItemStackParticleEffect(ParticleTypes.ITEM, this.getStack(INPUT_SLOT).getItem().getDefaultStack()),
+                        pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                        4, 0, 0, 0, 0.1);
             }
         } else {
             resetProgress();
