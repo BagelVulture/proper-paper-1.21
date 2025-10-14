@@ -121,6 +121,7 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
         } else {
             resetProgress();
         }
+        world.updateListeners(pos, state, state, 3);
     }
 
     private void resetProgress() {
@@ -139,7 +140,7 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
         this.removeStack(INPUT_SLOT, sieveRecipe.inputCount());
         this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
                 this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     private boolean hasCraftingFinished() {
@@ -186,7 +187,10 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
     }
 
 
-
+    @Override
+    public void markDirty() {
+        if (world != null) world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+    }
 
     @Override
     public void setStack(int slot, ItemStack stack) {
@@ -194,6 +198,6 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
         if (stack.getCount() > getMaxCountPerStack()) {
             stack.setCount(getMaxCountPerStack());
         }
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 }

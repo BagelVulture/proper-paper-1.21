@@ -20,8 +20,7 @@ public class SieveBlockEntityRenderer implements BlockEntityRenderer<SieveBlockE
     @Override
     public void render(SieveBlockEntity entity, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        BakedModelManager modelManager = client.getBakedModelManager();
+        BakedModelManager modelManager = MinecraftClient.getInstance().getBakedModelManager();
 
         Identifier modelId = Identifier.of("proper-paper", "block/paper_pulp");
         BakedModel model = modelManager.getModel(modelId);
@@ -29,7 +28,7 @@ public class SieveBlockEntityRenderer implements BlockEntityRenderer<SieveBlockE
         matrices.push();
 
         if (entity.count(ModItems.PAPER_PULP) > 0) {
-            client.getBlockRenderManager().getModelRenderer().render(
+            MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(
                     entity.getWorld(), model, Blocks.AIR.getDefaultState(), entity.getPos(), matrices,
                     vertexConsumers.getBuffer(RenderLayer.getCutout()), false, entity.getWorld().random, 0,
                     OverlayTexture.DEFAULT_UV

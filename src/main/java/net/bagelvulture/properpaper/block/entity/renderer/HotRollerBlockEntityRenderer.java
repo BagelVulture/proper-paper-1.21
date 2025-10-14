@@ -1,7 +1,6 @@
 package net.bagelvulture.properpaper.block.entity.renderer;
 
 import net.bagelvulture.properpaper.block.entity.custom.HotRollerBlockEntity;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -19,17 +18,29 @@ public class HotRollerBlockEntityRenderer implements BlockEntityRenderer<HotRoll
     @Override
     public void render(HotRollerBlockEntity entity, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light, int overlay) {
+
+        if (entity.getWorld() == null) return;
+
+        int progress = entity.getProgress();
+        int maxProgress = entity.getMaxProgress();
+
+        if (progress <= 0 || maxProgress <= 0) return;
+
         MinecraftClient client = MinecraftClient.getInstance();
         BakedModelManager modelManager = client.getBakedModelManager();
+        BakedModel paperModel = modelManager.getModel(Identifier.of("proper-paper", "block/paper_rolling"));
 
-        BakedModel rollers = modelManager.getModel(Identifier.of("proper-paper", "block/wet_paper"));
+        float progressRatio = (progress + tickDelta) / (float) maxProgress;
+        progressRatio = Math.min(Math.max(progressRatio, 0f), 1f);
+
+        float zOffset = progressRatio - 0.5f;
 
         matrices.push();
+        matrices.translate(0, 0, zOffset);
 
         client.getBlockRenderManager().getModelRenderer().render(
-                entity.getWorld(), rollers, Blocks.AIR.getDefaultState(), entity.getPos(), matrices,
-                vertexConsumers.getBuffer(RenderLayer.getCutout()), false, entity.getWorld().random, 0,
-                OverlayTexture.DEFAULT_UV
+                matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getCutout()), null, paperModel,
+                1.0f, 1.0f, 1.0f, light, OverlayTexture.DEFAULT_UV
         );
 
         matrices.pop();

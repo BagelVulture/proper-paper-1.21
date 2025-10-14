@@ -42,6 +42,9 @@ public class ProperPaperClient implements ClientModInitializer {
 
         HandledScreens.register(ModScreenHandlers.HOT_ROLLER_SCREEN_HANDLER, HotRollerScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.HOT_ROLLER_BE, HotRollerBlockEntityRenderer::new);
+        ModelLoadingPlugin.register(pluginContext -> {
+            pluginContext.addModels(Identifier.of("proper-paper", "block/paper_rolling"));
+        });
 
         HandledScreens.register(ModScreenHandlers.MACERATOR_SCREEN_HANDLER, MaceratorScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.MACERATOR_BE, MaceratorBlockEntityRenderer::new);

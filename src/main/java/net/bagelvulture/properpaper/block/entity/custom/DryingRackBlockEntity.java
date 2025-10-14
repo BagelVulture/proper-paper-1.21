@@ -169,7 +169,7 @@ public class DryingRackBlockEntity extends BlockEntity implements ExtendedScreen
 
     @Override
     public void markDirty() {
-        if (world != null) world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        if (world != null) world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     @Override
@@ -178,6 +178,6 @@ public class DryingRackBlockEntity extends BlockEntity implements ExtendedScreen
         if (stack.getCount() > getMaxCountPerStack()) {
             stack.setCount(getMaxCountPerStack());
         }
-        if (world != null) world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        if (world != null) world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 }

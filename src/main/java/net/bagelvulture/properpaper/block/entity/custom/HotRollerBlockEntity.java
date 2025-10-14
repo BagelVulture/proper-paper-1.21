@@ -108,9 +108,14 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
             HotRollerRecipe hotRollerRecipe = recipeEntry.get().value();
             if (progress == 0) {
                 maxProgress = hotRollerRecipe.rollingTime();
+                if (world != null && !world.isClient) {
+                    world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+                }
             }
             increaseCraftingProgress();
-            markDirty(world, pos, state);
+            if (world != null) {
+                markDirty(world, pos, state);
+            }
 
             if (hasCraftingFinished()) {
                 craftItem();
@@ -124,6 +129,9 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
     private void resetProgress() {
         this.progress = 0;
         this.maxProgress = 72;
+        if (world != null && !world.isClient) {
+            world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+        }
     }
 
     private void craftItem() {
@@ -137,7 +145,7 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
         this.removeStack(INPUT_SLOT, hotRollerRecipe.inputCount());
         this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
                 this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     private boolean hasCraftingFinished() {
@@ -153,6 +161,10 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
 
         if (canInsertItemIntoOutputSlot(result) && canInsertAmountIntoOutputSlot(result.getCount())) {
             this.progress++;
+
+            if (world != null && !world.isClient) {
+                world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+            }
         }
     }
 
@@ -188,7 +200,7 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
 
     @Override
     public void markDirty() {
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     @Override
@@ -197,6 +209,15 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
         if (stack.getCount() > getMaxCountPerStack()) {
             stack.setCount(getMaxCountPerStack());
         }
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+    }
+
+
+    public int getProgress() {
+        return this.progress;
+    }
+
+    public int getMaxProgress() {
+        return this.maxProgress;
     }
 }

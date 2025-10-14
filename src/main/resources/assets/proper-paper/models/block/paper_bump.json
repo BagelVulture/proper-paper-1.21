@@ -1,0 +1,21 @@
+{
+	"format_version": "1.9.0",
+	"textures": {
+		"0": "proper-paper:block/paper_pulp",
+		"particle": "proper-paper:block/paper_pulp"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [1, 1, 1],
+			"faces": {
+				"north": {"uv": [8, 6, 9, 7], "texture": "#0"},
+				"east": {"uv": [8, 6, 9, 7], "texture": "#0"},
+				"south": {"uv": [8, 6, 9, 7], "texture": "#0"},
+				"west": {"uv": [8, 6, 9, 7], "texture": "#0"},
+				"up": {"uv": [8, 6, 9, 7], "texture": "#0"},
+				"down": {"uv": [8, 6, 9, 7], "texture": "#0"}
+			}
+		}
+	]
+}

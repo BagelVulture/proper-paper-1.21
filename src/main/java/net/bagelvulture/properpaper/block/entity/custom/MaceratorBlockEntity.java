@@ -139,7 +139,7 @@ public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenH
         this.removeStack(INPUT_SLOT, maceratorRecipe.inputCount());
         this.setStack(OUTPUT_SLOT, new ItemStack(output.getItem(),
                 this.getStack(OUTPUT_SLOT).getCount() + output.getCount()));
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     private boolean hasCraftingFinished() {
@@ -190,7 +190,7 @@ public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenH
 
     @Override
     public void markDirty() {
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     @Override
@@ -199,6 +199,6 @@ public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenH
         if (stack.getCount() > getMaxCountPerStack()) {
             stack.setCount(getMaxCountPerStack());
         }
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 2);
+        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 }
