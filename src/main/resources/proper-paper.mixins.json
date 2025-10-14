@@ -3,7 +3,7 @@
 	"package": "net.bagelvulture.properpaper.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+      "WaterCauldronMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
