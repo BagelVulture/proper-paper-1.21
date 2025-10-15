@@ -17,8 +17,8 @@ public class ModTags {
 
     public static class Items {
 
-        private static TagKey<Item> createTag() {
-            return TagKey.of(RegistryKeys.ITEM, Identifier.of(ProperPaper.MOD_ID, "example_tag"));
+        private static TagKey<Item> createTag(String name) {
+            return TagKey.of(RegistryKeys.ITEM, Identifier.of(ProperPaper.MOD_ID, name));
         }
     }
 }
