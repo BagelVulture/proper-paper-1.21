@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "proper-paper:papermaking_tent",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+
+    "salt": 1589723644,
+
+    "spacing": 60,
+
+    "separation": 50
+  }
+}
