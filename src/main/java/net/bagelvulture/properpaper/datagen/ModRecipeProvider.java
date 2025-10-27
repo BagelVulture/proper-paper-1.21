@@ -28,6 +28,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
+        // mod item recipes
         SieveRecipeJsonBuilder.create(
                         RecipeCategory.MISC,
                         ModItems.DAMP_PAPER, 2,
@@ -78,6 +79,26 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
 
 
+        // vanilla integration recipes
+        SieveRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        Items.CLAY, 2,
+                        Ingredient.ofItems(Items.MUD), 1,
+                        400
+                ).criterion(hasItem(Items.MUD), conditionsFromItem(Items.MUD))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "clay"));
+
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        Items.REDSTONE, 1,
+                        Ingredient.ofItems(Items.REDSTONE_BLOCK), 1,
+                        40
+                ).criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "redstone"));
+
+
+
+        // crafting the workbenches
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.DRYING_RACK)
                 .pattern("AAA")
                 .pattern("ABA")
@@ -109,8 +130,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("ABA")
                 .pattern("A A")
                 .pattern("A A")
-                .input('B', ItemTags.PLANKS)
-                .input('C', Items.STRING)
+                .input('A', ItemTags.PLANKS)
+                .input('B', Items.STRING)
                 .criterion("has_item_in_tag", conditionsFromTag(ItemTags.PLANKS))
                 .offerTo(exporter);
     }

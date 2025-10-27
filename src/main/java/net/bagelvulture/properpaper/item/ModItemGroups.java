@@ -16,6 +16,8 @@ public class ModItemGroups {
             (ProperPaper.MOD_ID, "proper-paper_item_group"), FabricItemGroup.builder().icon(() -> new ItemStack
                     (ModItems.DAMP_PAPER)).displayName(Text.translatable("itemgroup.proper-paper.proper-paper_item_group"))
             .entries((displayContext, entries) -> {
+                entries.add(ModItems.GUIDE_BOOK);
+
                 entries.add(ModItems.WOOD_CHIPS);
                 entries.add(ModItems.SAWDUST);
                 entries.add(ModItems.PAPER_PULP);

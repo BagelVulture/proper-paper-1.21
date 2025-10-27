@@ -2,6 +2,7 @@ package net.bagelvulture.properpaper.item;
 
 
 import net.bagelvulture.properpaper.ProperPaper;
+import net.bagelvulture.properpaper.item.custom.GuideBook;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -14,6 +15,8 @@ public class ModItems {
     public static final Item PAPER_PULP = registerItem("paper_pulp", new Item(new Item.Settings()));
     public static final Item DAMP_PAPER = registerItem("damp_paper", new Item(new Item.Settings()));
     public static final Item ROUGH_PAPER = registerItem("rough_paper", new Item(new Item.Settings()));
+
+    public static final Item GUIDE_BOOK = registerItem("guide_book", new GuideBook(new Item.Settings()));
 
 
     private static Item registerItem(String name, Item item) {

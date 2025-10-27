@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.bagelvulture.properpaper.block.entity.ImplementedInventory;
 import net.bagelvulture.properpaper.block.entity.ModBlockEntities;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -17,15 +19,20 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -111,12 +118,13 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
             if (progress == 0) {
                 maxProgress = sieveRecipe.sieveingTime();
             }
-            increaseCraftingProgress();
+            increaseCraftingProgress(pos);
             markDirty(world, pos, state);
 
             if (hasCraftingFinished()) {
                 craftItem();
                 resetProgress();
+                dripIntoCauldron();
             }
         } else {
             resetProgress();
@@ -147,7 +155,7 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
         return this.progress >= this.maxProgress;
     }
 
-    private void increaseCraftingProgress() {
+    private void increaseCraftingProgress(BlockPos pos) {
         Optional<RecipeEntry<SieveRecipe>> recipeEntry = getCurrentRecipe();
         if (recipeEntry.isEmpty()) return;
 
@@ -156,6 +164,15 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
 
         if (canInsertItemIntoOutputSlot(result) && canInsertAmountIntoOutputSlot(result.getCount())) {
             this.progress++;
+        }
+
+        if(Math.random() >= 0.85 && !world.isClient()) {
+            ((ServerWorld) world).spawnParticles(ParticleTypes.FALLING_WATER,
+                    pos.getX() + ((Math.random()) / 2) + 0.25, pos.getY() + 0.8, pos.getZ() + ((Math.random()) / 2) + 0.25,
+                    1,
+                    0.0, 0.0, 0.0,
+                    0.0
+            );
         }
     }
 
@@ -199,5 +216,39 @@ public class SieveBlockEntity extends BlockEntity implements ExtendedScreenHandl
             stack.setCount(getMaxCountPerStack());
         }
         world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+    }
+
+    public void dripIntoCauldron() {
+        if (world == null) return;
+
+        for (int i = 1; i <= 4; i++) {
+            BlockPos targetPos = pos.down(i);
+            BlockState state = world.getBlockState(targetPos);
+
+            if (!world.isAir(targetPos) && !state.isOf(Blocks.CAULDRON)
+                    && !state.isOf(Blocks.WATER_CAULDRON)
+                    && !state.isOf(Blocks.LAVA_CAULDRON)
+                    && !state.isOf(Blocks.POWDER_SNOW_CAULDRON)) {
+                break;
+            }
+
+            if (state.isOf(Blocks.CAULDRON)) {
+                world.setBlockState(targetPos, Blocks.WATER_CAULDRON.getDefaultState()
+                        .with(LeveledCauldronBlock.LEVEL, 1));
+                world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, targetPos, 0);
+                world.playSound(null, targetPos, SoundEvents.BLOCK_POINTED_DRIPSTONE_DRIP_WATER, SoundCategory.BLOCKS, 0.8f, 1.0f);
+                return;
+            }
+
+            if (state.isOf(Blocks.WATER_CAULDRON)) {
+                int level = state.get(LeveledCauldronBlock.LEVEL);
+                if (level < 3) {
+                    world.setBlockState(targetPos, state.with(LeveledCauldronBlock.LEVEL, level + 1));
+                    world.syncWorldEvent(WorldEvents.POINTED_DRIPSTONE_DRIPS_WATER_INTO_CAULDRON, targetPos, 0);
+                    world.playSound(null, targetPos, SoundEvents.BLOCK_POINTED_DRIPSTONE_DRIP_WATER, SoundCategory.BLOCKS, 0.8f, 1.0f);
+                }
+                return;
+            }
+        }
     }
 }

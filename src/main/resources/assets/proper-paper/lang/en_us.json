@@ -1,4 +1,6 @@
 {
+  "item.proper-paper.guide_book": "The Proper Way to Make Paper",
+
   "item.proper-paper.wood_chips": "Wood Chips",
   "item.proper-paper.sawdust": "Sawdust",
   "item.proper-paper.paper_pulp": "Paper Pulp",
@@ -10,5 +12,7 @@
   "block.proper-paper.drying_rack": "Drying Rack",
   "block.proper-paper.hot_roller": "Hot Roller",
   "block.proper-paper.macerator": "Macerator",
-  "block.proper-paper.sieve": "Sieve"
+  "block.proper-paper.sieve": "Sieve",
+
+  "death.attack.crush": "%s Was Crushed Into a Pulp By a Macerator"
 }

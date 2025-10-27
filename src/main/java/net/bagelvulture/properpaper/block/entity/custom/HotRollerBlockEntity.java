@@ -200,7 +200,7 @@ public class HotRollerBlockEntity extends BlockEntity implements ExtendedScreenH
 
     @Override
     public void markDirty() {
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
+        if (world != null) world.updateListeners(getPos(), getCachedState(), getCachedState(), 3);
     }
 
     @Override

@@ -21,6 +21,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        itemModelGenerator.register(ModItems.GUIDE_BOOK, Models.GENERATED);
+
         itemModelGenerator.register(ModItems.WOOD_CHIPS, Models.GENERATED);
         itemModelGenerator.register(ModItems.SAWDUST, Models.GENERATED);
         itemModelGenerator.register(ModItems.PAPER_PULP, Models.GENERATED);

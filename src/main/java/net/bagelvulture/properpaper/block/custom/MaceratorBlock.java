@@ -1,12 +1,15 @@
 package net.bagelvulture.properpaper.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.bagelvulture.properpaper.ProperPaper;
 import net.bagelvulture.properpaper.block.entity.ModBlockEntities;
 import net.bagelvulture.properpaper.block.entity.custom.MaceratorBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -100,6 +103,16 @@ public class MaceratorBlock extends BlockWithEntity implements BlockEntityProvid
 
         return validateTicker(type, ModBlockEntities.MACERATOR_BE,
                 (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+        super.onSteppedOn(world, pos, state, entity);
+        if(entity.isLiving()) {
+            entity.damage(ProperPaper.crush(world), 2);
+        } else if (entity instanceof ItemEntity) {
+            entity.kill();
+        }
     }
 
 

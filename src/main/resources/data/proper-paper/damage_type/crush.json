@@ -1,0 +1,11 @@
+{
+  "message_id": "crush",
+  "exhaustion": 0.3,
+  "scaling": "always",
+  "effects": "freezing",
+  "bypasses_armor": true,
+  "bypasses_invulnerability": true,
+  "is_unblockable": true,
+  "always_hurts_players": true,
+  "always_hurts_mobs": true
+}
