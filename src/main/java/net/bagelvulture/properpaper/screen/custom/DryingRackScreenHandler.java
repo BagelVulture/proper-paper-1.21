@@ -28,10 +28,10 @@ public class DryingRackScreenHandler extends ScreenHandler {
         this.blockEntity = ((DryingRackBlockEntity) blockEntity);
         this.propertyDelegate = propertyDelegate;
 
-        int baseX = 44;
+        int baseX = 26;
         int baseY = 34;
         for (int i = 0; i < 4; i++) {
-            this.addSlot(new Slot(this.inventory, i, baseX + i * 24, baseY) {
+            this.addSlot(new Slot(this.inventory, i, baseX + i * 36, baseY) {
                 @Override
                 public boolean canInsert(ItemStack stack) {
                     return getStack().isEmpty();
@@ -53,7 +53,7 @@ public class DryingRackScreenHandler extends ScreenHandler {
     public int getScaledSlotProgress(int slot) {
         int progress = this.propertyDelegate.get(slot);
         int max = this.propertyDelegate.get(4 + slot);
-        int arrowPixelSize = 24;
+        int arrowPixelSize = 19;
         return (max > 0 && progress > 0) ? progress * arrowPixelSize / max : 0;
     }
 

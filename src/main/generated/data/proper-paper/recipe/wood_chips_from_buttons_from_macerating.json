@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:macerator",
+  "ingredient": {
+    "tag": "minecraft:wooden_buttons"
+  },
+  "input_count": 6,
+  "maceratingtime": 5,
+  "result": {
+    "count": 1,
+    "id": "proper-paper:wood_chips"
+  }
+}

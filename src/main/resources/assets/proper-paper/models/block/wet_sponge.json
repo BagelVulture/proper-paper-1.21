@@ -1,0 +1,23 @@
+{
+	"format_version": "1.9.0",
+	"textures": {
+		"0": "proper-paper:block/wet_sponge",
+		"particle": "proper-paper:block/wet_sponge"
+	},
+	"elements": [
+		{
+			"name": "wet_sponge",
+			"from": [0, 0, 0],
+			"to": [0, 10, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 10, 5]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 10], "texture": "#0"},
+				"east": {"uv": [0, 0, 10, 10], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 10], "texture": "#0"},
+				"west": {"uv": [10, 0, 0, 10], "texture": "#0"},
+				"up": {"uv": [0, 0, 0, 10], "texture": "#0"},
+				"down": {"uv": [0, 0, 0, 10], "texture": "#0"}
+			}
+		}
+	]
+}

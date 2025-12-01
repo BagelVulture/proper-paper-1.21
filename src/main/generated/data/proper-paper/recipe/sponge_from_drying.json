@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:drying_rack",
+  "dryingtime": 400,
+  "ingredient": {
+    "item": "minecraft:wet_sponge"
+  },
+  "input_count": 1,
+  "result": {
+    "count": 1,
+    "id": "minecraft:sponge"
+  }
+}

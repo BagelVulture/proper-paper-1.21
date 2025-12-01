@@ -12,8 +12,10 @@ import net.minecraft.util.Identifier;
 public class DryingRackScreen extends HandledScreen<DryingRackScreenHandler> {
     private static final Identifier GUI_TEXTURE =
             Identifier.of(ProperPaper.MOD_ID, "textures/gui/dryingrack/dryingrack_gui.png");
-    private static final Identifier ARROW_TEXTURE =
-            Identifier.of(ProperPaper.MOD_ID, "textures/gui/arrow_progress.png");
+    private static final Identifier WET_TEXTURE =
+            Identifier.of(ProperPaper.MOD_ID, "textures/gui/dryingrack/slotbgw.png");
+    private static final Identifier DRY_TEXTURE =
+            Identifier.of(ProperPaper.MOD_ID, "textures/gui/dryingrack/slotbgd.png");
 
     public DryingRackScreen(DryingRackScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -30,20 +32,16 @@ public class DryingRackScreen extends HandledScreen<DryingRackScreenHandler> {
 
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrows(context, x, y);
-    }
-
-    private void renderProgressArrows(DrawContext context, int x, int y) {
-        int baseSlotX = x + 44;
-        int slotY = y + 34;
-        int arrowYOffset = 24;
-
         for (int i = 0; i < 4; i++) {
-            int arrowWidth = handler.getScaledSlotProgress(i);
-            if (arrowWidth > 0) {
-                context.drawTexture(ARROW_TEXTURE, baseSlotX + i * 24, slotY + arrowYOffset,
-                        0, 0, arrowWidth, 16,
-                        24, 16);
+            int arrowHeight = handler.getScaledSlotProgress(i);
+            assert handler.blockEntity.getWorld() != null;
+            if (arrowHeight > 0) {
+                context.drawTexture(WET_TEXTURE, x + 25 + i * 36, y + 32,
+                        0, 0, 18, 19,
+                        18, 19);
+                context.drawTexture(DRY_TEXTURE, x + 25 + i * 36, y + 32,
+                        0, 0, 18, arrowHeight,
+                        18, 19);
             }
         }
     }

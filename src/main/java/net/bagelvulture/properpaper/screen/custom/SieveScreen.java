@@ -30,12 +30,8 @@ public class SieveScreen extends HandledScreen<SieveScreenHandler> {
 
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrow(context, x, y);
-    }
-
-    private void renderProgressArrow(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
-            context.drawTexture(ARROW_TEXTURE, x + 76, y + 35, 0, 0,
+            context.drawTexture(ARROW_TEXTURE, x + 75, y + 35, 0, 0,
                     handler.getScaledArrowProgress(), 16, 24, 16);
         }
     }

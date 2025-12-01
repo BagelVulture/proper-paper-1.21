@@ -68,6 +68,62 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         40
                 ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.LOGS))
                 .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_logs"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.WOODEN_STAIRS), 1,
+                        40
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_STAIRS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_stairs"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.WOODEN_SLABS), 2,
+                        30
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_SLABS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_slabs"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.WOODEN_FENCES), 1,
+                        20
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_FENCES))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_fences"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.FENCE_GATES), 1,
+                        20
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.FENCE_GATES))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_fence_gates"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 2,
+                        Ingredient.fromTag(ItemTags.WOODEN_DOORS), 1,
+                        40
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_DOORS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_doors"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.WOODEN_TRAPDOORS), 1,
+                        30
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_TRAPDOORS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_trapdoors"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.WOODEN_PRESSURE_PLATES), 1,
+                        20
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_PRESSURE_PLATES))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_pressure_plates"));
+        MaceratorRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        ModItems.WOOD_CHIPS, 1,
+                        Ingredient.fromTag(ItemTags.WOODEN_BUTTONS), 6,
+                        5
+                ).criterion("has_item_in_tag", conditionsFromTag(ItemTags.WOODEN_BUTTONS))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "wood_chips_from_buttons"));
 
         MaceratorRecipeJsonBuilder.create(
                         RecipeCategory.MISC,
@@ -88,13 +144,21 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 ).criterion(hasItem(Items.MUD), conditionsFromItem(Items.MUD))
                 .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "clay"));
 
-        MaceratorRecipeJsonBuilder.create(
+        HotRollerRecipeJsonBuilder.create(
                         RecipeCategory.MISC,
-                        Items.REDSTONE, 1,
-                        Ingredient.ofItems(Items.REDSTONE_BLOCK), 1,
-                        40
-                ).criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
-                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "redstone"));
+                        Items.GLASS_PANE, 3,
+                        Ingredient.ofItems(Items.SAND), 1,
+                        100
+                ).criterion(hasItem(Items.SAND), conditionsFromItem(Items.SAND))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "glass_pane"));
+
+        DryingRackRecipeJsonBuilder.create(
+                        RecipeCategory.MISC,
+                        Items.SPONGE, 1,
+                        Ingredient.ofItems(Items.WET_SPONGE), 1,
+                        400
+                ).criterion(hasItem(Items.WET_SPONGE), conditionsFromItem(Items.WET_SPONGE))
+                .offerTo(exporter, Identifier.of(ProperPaper.MOD_ID, "sponge"));
 
 
 

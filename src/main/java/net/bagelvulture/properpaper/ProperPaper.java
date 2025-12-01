@@ -8,7 +8,6 @@ import net.bagelvulture.properpaper.recipe.ModRecipes;
 import net.bagelvulture.properpaper.screen.ModScreenHandlers;
 import net.bagelvulture.properpaper.util.ModDataComponentTypes;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.entity.damage.DamageScaling;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.*;
@@ -27,6 +26,7 @@ public class ProperPaper implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+        LOGGER.info("Started Registering " + MOD_ID);
 		ModItems.registerModItems();
 		ModItemGroups.registerModItemGroups();
 		ModBlocks.registerModBlocks();
@@ -37,6 +37,7 @@ public class ProperPaper implements ModInitializer {
 		ModScreenHandlers.registerScreenHandlers();
 
 		ModRecipes.registerRecipes();
+        LOGGER.info("Finished Registering " + MOD_ID);
 	}
 
     public static DamageSource crush(World world) {

@@ -12,6 +12,7 @@ import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.Direction;
@@ -28,6 +29,8 @@ public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<Drying
 
         BakedModel wetModel = modelManager.getModel(Identifier.of("proper-paper", "block/wet_paper"));
         BakedModel dryModel = modelManager.getModel(Identifier.of("proper-paper", "block/dry_paper"));
+        BakedModel wetspModel = modelManager.getModel(Identifier.of("proper-paper", "block/wet_sponge"));
+        BakedModel dryspModel = modelManager.getModel(Identifier.of("proper-paper", "block/dry_sponge"));
 
         matrices.push();
 
@@ -40,6 +43,10 @@ public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<Drying
                 modelToRender = wetModel;
             } else if (entity.getItems().get(i).getItem() == ModItems.ROUGH_PAPER) {
                 modelToRender = dryModel;
+            } else if (entity.getItems().get(i).getItem() == Items.SPONGE) {
+                modelToRender = dryspModel;
+            } else if (entity.getItems().get(i).getItem() == Items.WET_SPONGE) {
+                modelToRender = wetspModel;
             } else {
                 continue;
             }

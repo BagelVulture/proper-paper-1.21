@@ -127,7 +127,11 @@ public class DryingRackBlockEntity extends BlockEntity implements ExtendedScreen
                     maxProgress[slot] = recipe.dryingTime();
                 }
 
-                progress[slot]++;
+                if (world.getRegistryKey() == World.NETHER) {
+                    progress[slot] = progress[slot] + 4;
+                } else {
+                    progress[slot]++;
+                }
                 changed = true;
 
                 if (progress[slot] >= maxProgress[slot]) {
@@ -151,9 +155,8 @@ public class DryingRackBlockEntity extends BlockEntity implements ExtendedScreen
         }
     }
 
-    private Optional<RecipeEntry<DryingRackRecipe>> getRecipeForSlot(int slot, World world) {
-        ItemStack forRecipe = inventory.get(slot);
-        return world.getRecipeManager().getFirstMatch(ModRecipes.DRYING_RACK_TYPE, new DryingRackRecipeInput(forRecipe), world);
+    public Optional<RecipeEntry<DryingRackRecipe>> getRecipeForSlot(int slot, World world) {
+        return world.getRecipeManager().getFirstMatch(ModRecipes.DRYING_RACK_TYPE, new DryingRackRecipeInput(inventory.get(slot)), world);
     }
 
     @Nullable

@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
     private static final Identifier GUI_TEXTURE =
-            Identifier.of(ProperPaper.MOD_ID, "textures/gui/macerator/macerator_gui.png");
+            Identifier.of(ProperPaper.MOD_ID, "textures/gui/hotroller/hotroller_gui.png");
     private static final Identifier ARROW_TEXTURE =
             Identifier.of(ProperPaper.MOD_ID, "textures/gui/arrow_progress.png");
 
@@ -30,12 +30,8 @@ public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
 
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        renderProgressArrow(context, x, y);
-    }
-
-    private void renderProgressArrow(DrawContext context, int x, int y) {
         if(handler.isCrafting()) {
-            context.drawTexture(ARROW_TEXTURE, x + 76, y + 35, 0, 0,
+            context.drawTexture(ARROW_TEXTURE, x + 75, y + 35, 0, 0,
                     handler.getScaledArrowProgress(), 16, 24, 16);
         }
     }

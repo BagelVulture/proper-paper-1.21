@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:hot_roller",
+  "ingredient": {
+    "item": "minecraft:sand"
+  },
+  "input_count": 1,
+  "result": {
+    "count": 3,
+    "id": "minecraft:glass_pane"
+  },
+  "rollingtime": 100
+}

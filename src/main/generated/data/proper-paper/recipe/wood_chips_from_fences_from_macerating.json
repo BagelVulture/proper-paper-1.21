@@ -1,0 +1,12 @@
+{
+  "type": "proper-paper:macerator",
+  "ingredient": {
+    "tag": "minecraft:wooden_fences"
+  },
+  "input_count": 1,
+  "maceratingtime": 20,
+  "result": {
+    "count": 1,
+    "id": "proper-paper:wood_chips"
+  }
+}

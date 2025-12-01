@@ -27,29 +27,21 @@ public class ProperPaperClient implements ClientModInitializer {
 
         HandledScreens.register(ModScreenHandlers.SIEVE_SCREEN_HANDLER, SieveScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.SIEVE_BE, SieveBlockEntityRenderer::new);
-        ModelLoadingPlugin.register(pluginContext -> {
-            pluginContext.addModels(Identifier.of("proper-paper", "block/paper_pulp"));
-        });
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/paper_pulp")));
 
         HandledScreens.register(ModScreenHandlers.DRYING_RACK_SCREEN_HANDLER, DryingRackScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.DRYING_RACK_BE, DryingRackBlockEntityRenderer::new);
-        ModelLoadingPlugin.register(pluginContext -> {
-            pluginContext.addModels(Identifier.of("proper-paper", "block/wet_paper"));
-        });
-        ModelLoadingPlugin.register(pluginContext -> {
-            pluginContext.addModels(Identifier.of("proper-paper", "block/dry_paper"));
-        });
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/wet_paper")));
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/dry_paper")));
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/wet_sponge")));
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/dry_sponge")));
 
         HandledScreens.register(ModScreenHandlers.HOT_ROLLER_SCREEN_HANDLER, HotRollerScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.HOT_ROLLER_BE, HotRollerBlockEntityRenderer::new);
-        ModelLoadingPlugin.register(pluginContext -> {
-            pluginContext.addModels(Identifier.of("proper-paper", "block/paper_rolling"));
-        });
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/paper_rolling")));
 
         HandledScreens.register(ModScreenHandlers.MACERATOR_SCREEN_HANDLER, MaceratorScreen::new);
         BlockEntityRendererFactories.register(ModBlockEntities.MACERATOR_BE, MaceratorBlockEntityRenderer::new);
-        ModelLoadingPlugin.register(pluginContext -> {
-            pluginContext.addModels(Identifier.of("proper-paper", "block/macerator_spinny_things"));
-        });
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(Identifier.of("proper-paper", "block/macerator_spinny_things")));
     }
 }
